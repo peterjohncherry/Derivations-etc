@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{relsize}
+\usepackage{bbold}
+\usepackage{mathtext}
+\usepackage{pdfpages}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=35mm,
+ top=25mm,
+ bottom=25mm,
+ right=20mm,
+ }
+\usepackage{cite}
+\linespread{1.3}
+
+\begin{document}
+\begin{equation*}
+\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\langle J |\tilde{c}^{M\dagger}_{J} T^{\dagger}_{LM,abcd}(\hat{E}^{\dagger}_{ab}
+\hat{E}^{\dagger}_{cd}-\delta_{bc}\hat{E}_{ad})(\hat{E}_{wx}\hat{E}_{yz}-\delta_{xy}\hat{E}_{wz})g(1,2)|K\rangle
+\end{equation*}
+
+\begin{equation}
+=\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\langle J |\tilde{c}^{M\dagger}_{J}T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)|K\rangle
+\end{equation}
+\begin{equation}
+-\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\delta_{xy}\langle J |\tilde{c}^{M\dagger}_{J}T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wz}g(1,2)|K\rangle
+\end{equation}
+\begin{equation}
+-\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\delta_{bc}\langle J |\tilde{c}^{M\dagger}_{J}T^{*}_{LM,badc}\hat{E}_{ad}\hat{E}_{wx}\hat{E}_{yz}g(1,2)|K\rangle
+\end{equation}
+\begin{equation}
++\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\delta_{bc}\delta_{xy}\langle J |\tilde{c}^{M\dagger}_{J}T^{*}_{LM,badc}\hat{E}_{ad}\hat{E}_{wz}g(1,2)|K\rangle
+\end{equation}
+\\
+\noindent Define a map between a set of orbital indexes $\{a,b,c,d,w,x,y,z\}$ and a determinant index:
+\begin{equation*}
+\Pi^{MK} : \{a,b,c,d,w,x,y,z\} \rightarrow J
+ \text{ \ \ \ \ \ \ \ \ \ \ } | J\rangle = \hat{E}_{ab}\hat{E}_{cd}\hat{E}_{wx}|K\rangle 
+\end{equation*}
+\begin{equation*}
+\pi^{MK} (a,b,c,d,w,x,y,z) =\pi^{MK}_{abcdwxyz}= J 
+\end{equation*}
+\begin{equation*}
+\Theta^{MK}_{abcdwxyz} = c_{\pi^{MK}_{abcdwxyz}} = c_{J} 
+\end{equation*}
+These expressions can be used to rewrite the above expressions without a sum over $J$:
+\begin{equation*}
+\text{(1) = } \sum_{L} \sum_{M}  \sum_{\substack{abcd\\ wxyz}}\Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz} |T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)|K\rangle
+\end{equation*}
+Note that $|J\rangle$ and $|K\rangle$ are orthogonal
+any to determinants with orbitals in the virtual space occupied\footnote{assuming preservation of the number of electrons},
+or orbitals in the inactive space unoccupied. This enables further simplification of the above expressions via grouping together
+different ranges, i.e., inactive, active, virtual, for the indexes, $a,b,c,d$, of the MS-CASPT2 amplitudes, $T_{LM,abcd}$:\\
+
+\noindent If $a,b,c,d \notin \{active\} $, then $|K\rangle = \hat{E}_{xw}\hat{E}_{zy}|J\rangle$, hence 
+\begin{equation*}
+\sum_{L} \sum_{M} \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}} \Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz} |T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)
+\hat{E}_{xw}\hat{E}_{zy}|K\rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M} \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}} \Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}g(1,2)|\pi^{MK}_{abcdwxyz} \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}  \sum_{wxyz}^{\in\{act\}} \Theta^{MK}_{wxyz} \sum_{abcd}^{\notin \{act\} }T^{*}_{LM,badc}g(badc)
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}  \sum_{wxyz}^{\in\{act\}} \Theta^{MK}_{wxyz}A^{LM}_{wxyz}
+\end{equation*}
+\\
+\noindent If $a,b \notin \{active\} $ and $c,d \in \{active\}$, then $|K\rangle = \hat{E}_{dc}\hat{E}_{xw}\hat{E}_{zy}|J\rangle$,  so 
+\begin{equation*}
+\sum_{L} \sum_{M} \sum_{ab}^{\notin \{act\} } \sum_{cdwxyz}^{\in\{act\}} 
+\Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)\hat{E}_{cd}\hat{E}_{xw}\hat{E}_{zy} |\pi^{MK}_{abcdwxyz}  \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M} \sum_{ab}^{\notin \{act\} } \sum_{cdwxyz}^{\in\{act\}} \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}
+\Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2)\hat{E}_{uv} |\pi^{MK}_{abcdwxyz}  \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}
+ \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2)\hat{E}_{uv} |\pi^{MK}_{abcdwxyz}  \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}T^{*}_{LM,badc}g(bauv)
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}A^{LM}_{cdwxyz}
+\end{equation*}
+\noindent If $a,b,c,d \in \{active\} $  then $|K\rangle = E_{\gamma\delta\eta\zeta}|J\rangle$ and  
+\begin{equation*}
+\sum_{L} \sum_{M} \sum_{abcdwxyz}^{\in\{act\}} 
+\Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)\hat{E}_{ab}\hat{E}_{cd}\hat{E}_{xw}\hat{E}_{zy} |\pi^{MK}_{abcdwxyz}  \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M} \sum_{abcdwxyz}^{\in\{act\}} \Theta^{MK}_{abcdwxyz}\sum_{\substack{s,u\\ s\neq u}}^{\in\{b,d,x,z\}}\sum_{\substack{t,v\\ t\neq v}}^{\in\{a,c,w,y\}}
+ \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{uv}g(1,2)\hat{E}_{tv} |\pi^{MK}_{abcdwxyz}  \rangle
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}} T^{*}_{LM,badc}g(stuv)
+\end{equation*}
+\begin{equation*}
+=\sum_{L} \sum_{M}\sum_{abcdwxyz}^{\in\{act\}}\Theta^{MK}_{abcdwxyz}A^{LM}_{abcdwxyz}
+\end{equation*}
+
+\end{document}
+%Define a map between a set of orbital indexes $\{a,b,c,d...\}$ and a determinant index $J$:
+%\begin{equation*}
+%\Pi^{MK} : (a,b,c,d,w,x,y,z) \rightarrow J \text{\ \ \ \ such\ that \ \ \ } |J\rangle =   \hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}|K\rangle
+%\end{equation*}
+%\begin{equation*}
+%\pi^{MK} (a,b,c,d,w,x,y,z) =\pi^{MK}_{abcdwxyz}= J 
+%\end{equation*}
+%\begin{equation*}
+%\Theta^{MK}_{abcdwxyz} = c_{\pi^{MK} (a,b,c,d,w,x,y,z)} = c_{J} 
+%\end{equation*}
+%%\begin{equation*}
+%w,x,y,z \in \{active\text{\ } indices\}
+%\end{equation*}
+%\begin{equation*}
+%i,j,k,l \in \{inactive, \text{\ } active, \text{\ } virtual  \text{\ }   indices\}
+%\end{equation*}
+%Define a map between a set of orbital indexes $\{i_{1},i_{2},i_{3}i_{4}...\}$ and a determinant index:
+%\begin{equation*}
+%\Pi^{MK} : \{i_{1},i_{2},i_{3}i_{4}...i_{n}\} \rightarrow J \text{\ \ \ \ such\ that \ \ \ } |J\rangle =   \hat{E}_{ba}\hat{E}_{dc}|K\rangle
+%\end{equation*}
+%\begin{equation*}
+%\pi^{MK} (a,b,c,d,w,x,y,z) =\pi^{MK}_{abcdwxyz}= J 
+%\end{equation*}
+%\begin{equation*}
+%\Theta^{MK}_{abcdwxyz} = c_{\pi^{MK} (a,b,c,d,w,x,y,z)} = c_{J} 
+%\end{equation*}
+%\
+%satisfying $|K\rangle = \hat{E}_{\kappa\lambda}\hat{E}_{\mu\nu}|J\rangle$ with $\{\kappa,\lambda,\mu,\nu\} \subset  \{a,b,c,d,w,x,y,z\}$
