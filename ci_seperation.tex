@@ -37,31 +37,15 @@
 \begin{document}
 \begin{equation*}
 \sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
-\langle J |\tilde{c}^{\dagger}_{M,J} T^{\dagger}_{LM,abcd}(\hat{E}^{\dagger}_{ab}
-\hat{E}^{\dagger}_{cd}-\delta_{bc}\hat{E}_{ad})(\hat{E}_{wx}\hat{E}_{yz}-\delta_{xy}\hat{E}_{wz})g(1,2)|K\rangle
+\langle J |\tilde{c}^{\dagger}_{M,J} T^{\dagger}_{LM,abcd}(\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d})(\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z})g(ijkl)|K\rangle
 \end{equation*}
-
-\begin{equation}
-=\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
-\langle J |\tilde{c}^{\dagger}_{M,J}T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)|K\rangle
-\end{equation}
-\begin{equation}
--\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
-\delta_{xy}\langle J |\tilde{c}^{\dagger}_{M,J}T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wz}g(1,2)|K\rangle
-\end{equation}
-\begin{equation}
--\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
-\delta_{bc}\langle J |\tilde{c}^{\dagger}_{M,J}T^{*}_{LM,badc}\hat{E}_{ad}\hat{E}_{wx}\hat{E}_{yz}g(1,2)|K\rangle
-\end{equation}
-\begin{equation}
-+\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
-\delta_{bc}\delta_{xy}\langle J |\tilde{c}^{\dagger}_{M,J}T^{*}_{LM,badc}\hat{E}_{ad}\hat{E}_{wz}g(1,2)|K\rangle
-\end{equation}
-\\
+where $\{k,l\}\subset \{a,c,w,y\}$ and $\{i,j\}\subset \{b,d,x,z\}$
 \noindent Define a map between a set of orbital indexes $\{a,b,c,d,w,x,y,z\}$ and a determinant index:
 \begin{equation*}
 \Pi^{MK} : \{a,b,c,d,w,x,y,z\} \rightarrow J
- \text{ \ \ \ \ \ \ \ \ \ \ } | J\rangle = \hat{E}_{ab}\hat{E}_{cd}\hat{E}_{wx}\hat{E}_{yz}|K\rangle 
+ \text{ \ \ \ \ \ \ \ \ \ \ } | J\rangle = \hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}|K\rangle 
 \end{equation*}
 \begin{equation*}
 \pi^{K} (a,b,c,d,w,x,y,z) =\pi^{K}_{abcdwxyz}= J 
@@ -71,192 +55,69 @@
 \end{equation*}
 These expressions can be used to rewrite the above expressions without a sum over $J$:
 \begin{equation*}
-\text{(1) = } \sum_{L} \sum_{M}  \sum_{\substack{abcd\\ wxyz}}\Theta^{MK\dagger}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz} |T^{*}_{LM,badc}g(1,2)|K\rangle
+\text{(1) = } \sum_{L} \sum_{M}  \sum_{\substack{abcd\\ wxyz}}\Theta^{MK\dagger}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz} |T^{*}_{LM,badc}g(ijkl)|K\rangle
 \end{equation*}
 Note that $|J\rangle$ and $|K\rangle$ are orthogonal to
 any to determinants with orbitals in the virtual space occupied\footnote{assuming preservation of the number of electrons},
 or orbitals in the inactive space unoccupied. This enables further simplification of the above expressions via grouping together
 different ranges, i.e., inactive, active, virtual, for the indexes, $a,b,c,d$, of the MS-CASPT2 amplitudes, $T_{LM,abcd}$:\\
 
-\noindent If $a,b,c,d \notin \{active\} $, then 
-\begin{equation}
- |J\rangle =
-\begin{cases}
- \hat{E}_{wx}\hat{E}_{yz}|K\rangle \text{\ \ \ \ or \ \ }\\
- \hat{E}_{uv}|K\rangle \text{\ \ \ \ \ \ \ with \ \ } \{u\} \in \{w,y\}\text{\ \ \ \ and \ \ } v \in \{x,z\}\text{\  \ \ or} \\
- |K\rangle
- \end{cases}
-\end{equation}
+\noindent If $a,b,c,d \notin \{active\} $, then $\{i,j,k,l\} $= $\{b,a,d,c\}$.
+ 
 \begin{equation*}
-\sum_{M}  \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}} 
- c^{\dagger}_{M,J}  \langle J |T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2) |K  \rangle
+ \sum_{M} \sum_{J} \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}}
+ c^{\dagger}_{M,J}  \langle J|T^{*}_{LM,badc}\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
 \end{equation*}
+ 
+\begin{equation*}
+= \sum_{M}  \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}} 
+c^{\dagger}_{M,\pi^{K}_{wxyz}}
+ \sum_{abcd}^{\notin \{act\} }  \langle K |T^{*}_{LM,badc}g(badc) |K  \rangle s(badc, wxyz)
+\end{equation*}
+ 
+\begin{equation*}
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} c^{\dagger}_{M,\pi^{K}_{wxyz}}  A^{(g)}
+\end{equation*}
+where $s(badc,wxyz)$ is $\pm 1$ as determined by the anti-commutation relations of the creation annihilation operators.
 
-\begin{equation*}
-= \sum_{M}  \sum_{abcd}^{\notin \{act\} } \Bigg[\sum_{wxyz}^{\in\{act\}}\Bigg( 
- c^{\dagger}_{M,\pi^{K}_{wxyz}}  \langle \pi^{K}_{wxyz}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}g(1,2) |K  \rangle
-\end{equation*}
-\begin{equation*}
-+ \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}} 
- c^{\dagger}_{M,\pi^{K}_{uv}}  \langle \pi^{K}_{uv}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}g(1,2) |K  \rangle\Bigg)
-\end{equation*}
-\begin{equation*}
-+ c^{\dagger}_{M,K}  \langle K|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}g(1,2) |K  \rangle\Bigg]
-\end{equation*}
-
-\begin{equation*}
-= \sum_{M}  \Bigg[\sum_{wxyz}^{\in\{act\}}\Bigg( 
- c^{\dagger}_{M,\pi^{K}_{wxyz}}  + \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}}c^{\dagger}_{M,\pi^{K}_{uv}}\Bigg) + c^{\dagger}_{M,K} \Bigg] \sum_{abcd}^{\notin \{act\} } T^{*}_{LM,badc}g(ba,cd)
-\end{equation*}
-
-\begin{equation*}
-= \sum_{M}\Bigg[\sum_{wxyz}^{\in\{act\}}\Bigg( 
- \Theta^{MK\dagger}_{wxyz}  + \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}}\Theta^{MK\dagger}_{uv}\Bigg) + \Theta^{MK\dagger} \Bigg] A^{(g)}
-\end{equation*}
-\\
 \noindent If $a,b \notin \{active\} $ and $c,d \in \{active\}$, then
-\begin{equation}
- |J\rangle =
-\begin{cases}
- \hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}|K\rangle \text{\ \ \ \ or \ \ }\\
- \hat{E}_{st}\hat{E}_{uv}|K\rangle \text{\ \ \ \ \ with \ \ } \{t,v\} \subset \{c,x,z\}\text{\ \ \ \ and \ \ } \{s,u\} \subset \{d,w,y\}\\
- \hat{E}_{qr}|K\rangle \text{\ \ \ \ \ \ \ \ \ with \ \ } \{q\} \in \{d,w,y\}\text{\ \ \ \ and \ \ } r \in \{c,x,z\}\text{\  \ \ or} \\
- |K\rangle
- \end{cases}
-\end{equation}
 \begin{equation*}
-= \sum_{M}  \sum_{ab}^{\notin \{act\} } \Bigg[\sum_{cdwxyz}^{\in\{act\}}\Bigg( 
- c^{\dagger}_{M,\pi^{K}_{dcwxyz}}  \langle \pi^{K}_{dcwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle
+ \sum_{M}  \sum_{ab}^{\notin \{act\} } \sum_{cdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,J}  \langle J|T^{*}_{LM,badc}\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
 \end{equation*}
 \begin{equation*}
-+ \sum_{\{t,v\}}^{\subset\{d,x,z\}}\sum_{\{s,u\}}^{\subset\{c,w,y\}}
- c^{\dagger}_{M,\pi^{K}_{stuv}}  \langle \pi^{K}_{stuv}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle 
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} 
+\sum_{cd}^{\in\{act\}}  c^{\dagger}_{M,\pi^{K}_{dcwxyz}}
+\sum_{ab}^{\notin \{act\} }
+T^{*}_{LM,badc}
+\sum_{\{v\}}^{\subset\{d,x,z\}}\sum_{\{u\}}^{\subset\{c,w,y\}}
+\langle K| g(ab,uv) |K  \rangle s(badc,wxyz)
 \end{equation*}
 \begin{equation*}
-+ \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}} 
- c^{\dagger}_{M,\pi^{K}_{uv}}  \langle \pi^{K}_{uv}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle\Bigg)
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} 
+\sum_{cd}^{\in\{act\}}  c^{\dagger}_{M,\pi^{K}_{dcwxyz}}A^{(g)}_{dcwxyz}
+\end{equation*}
+\noindent If $a,b,c,d \in \{active\}$, then
+\begin{equation*}
+ \sum_{M}  \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,J}  \langle J|\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
 \end{equation*}
 \begin{equation*}
-+ c^{\dagger}_{M,K}  \langle K|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle\Bigg]
-\end{equation*}
-
-\begin{equation*}
-= \sum_{M}  \sum_{ab}^{\notin \{act\} }\sum_{cd}^{\in\{act\}} T^{*}_{LM,badc} \Bigg[\sum_{cdwxyz}^{\in\{act\}}\Bigg( 
- c^{\dagger}_{M,\pi^{K}_{wxyz}}  \langle \pi^{K}_{wxyz}|\hat{E}_{ba}\hat{E}_{dc}g(1,2) |K  \rangle
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} 
+ \sum_{\{t,v\}}^{\subset\{b,d,x,z\}}\sum_{\{s,u\}}^{\subset\{a,c,w,y\}}
+ \langle K|g(st,uv) |K  \rangle  s(badc,wxyz)
 \end{equation*}
 \begin{equation*}
-+ \sum_{\{t,v\}}^{\subset\{d,x,z\}}\sum_{\{s,u\}}^{\subset\{c,w,y\}}
- c^{\dagger}_{M,\pi^{K}_{stuv}}  \langle \pi^{K}_{st}|\hat{E}_{ba}\hat{E}_{uv}g(1,2) |K  \rangle 
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} T^{*}_{LM,badc}
+ \sum_{\{t,v\}}^{\subset\{b,d,x,z\}}\sum_{\{s,u\}}^{\subset\{a,c,w,y\}}
+ \langle K|\hat{E}_{ba}g(st,uv) |K  \rangle  s(badc,wxyz)
 \end{equation*}
 \begin{equation*}
-+ \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}} 
- c^{\dagger}_{M,\pi^{K}_{uv}}  \langle K|\hat{E}_{ba}\hat{E}_{uv}g(1,2) |K  \rangle\Bigg)
-\end{equation*}
-\begin{equation*}
-+ c^{\dagger}_{M,K}  \langle K|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle\Bigg]
-\end{equation*}
-
-\begin{equation*}
-= \sum_{M}  \sum_{ab}^{\notin \{act\} }\sum_{cd}^{\in\{act\}} T^{*}_{LM,badc} \Bigg[\sum_{cdwxyz}^{\in\{act\}}\Bigg( 
- c^{\dagger}_{M,\pi^{K}_{wxyz}}  \langle \pi^{K}_{dcwxyz}|\hat{E}_{ba}g(1,2) |K  \rangle
-\end{equation*}
-\begin{equation*}
-+ \sum_{\{t,v\}}^{\subset\{d,x,z\}}\sum_{\{s,u\}}^{\subset\{c,w,y\}}
- c^{\dagger}_{M,\pi^{K}_{stuv}}  \langle \pi^{K}_{stuv}|\hat{E}_{ba}g(1,2) |K  \rangle 
-\end{equation*}
-\begin{equation*}
-+ \sum_{u}^{\in\{w,y\}} \sum_{v}^{\in\{x,z\}} 
- c^{\dagger}_{M,\pi^{K}_{uv}}  \langle K|\hat{E}_{ba}g(1,2) |K  \rangle\Bigg)
-\end{equation*}
-\begin{equation*}
-+ c^{\dagger}_{M,K}  \langle K|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle\Bigg]
-\end{equation*}
-
-
-
-
-
-
-\begin{equation*}
-\sum_{L} \sum_{M}  \sum_{ab}^{\notin \{act\} } \Bigg[\sum_{cdwxyz}^{\in\{act\}} 
- c^{\dagger}_{M,\pi^{K}_{dcwxyz}}  \langle \pi^{K}_{dcwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle
-\end{equation*}
-\begin{equation*}
-\sum_{L} \sum_{M}  \sum_{ab}^{\notin \{act\} } \Bigg[\sum_{cdwxyz}^{\in\{act\}} 
- c^{\dagger}_{M,\pi^{K}_{dcwxyz}}  \langle \pi^{K}_{dcwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle
-\end{equation*}
-\begin{equation*}
-+ \sum_{cdwxyz}^{\in\{act\}} \sum_{\{t,v\}}^{\subset\{d,x,z\}}\sum_{\{s,u\}}^{\subset\{c,w,y\}}
- c^{\dagger}_{M,\pi^{K}_{stuv}}  \langle K |T^{*}_{LM,badc}\hat{E}_{ba}g(1,2) |K  \rangle \Bigg]
-\end{equation*}
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{equation*}
-=\sum_{L} \sum_{M} \sum_{ab}^{\notin \{act\} } \sum_{cdwxyz}^{\in\{act\}} \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}
-\Theta^{MK}_{dcwxyz} \langle K|T^{*}_{LM,badc}\hat{E}_{ba}g(1,2)\hat{E}_{uv} |K\rangle
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}
- \langle K |T^{*}_{LM,badc}\hat{E}_{ba}g(1,2)\hat{E}_{uv} |K\rangle
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}}T^{*}_{LM,badc}g(bauv)
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}A^{LM}_{cdwxyz}
-\end{equation*}
-\noindent If $a,b,c,d \in \{active\} $  then $|K\rangle = E_{\gamma\delta\eta\zeta}|J\rangle$ and  
-\begin{equation*}
-\sum_{L} \sum_{M} \sum_{abcdwxyz}^{\in\{act\}} 
-\Theta^{MK}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}g(1,2)\hat{E}_{ab}\hat{E}_{cd}\hat{E}_{xw}\hat{E}_{zy} |\pi^{MK}_{abcdwxyz}  \rangle
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M} \sum_{abcdwxyz}^{\in\{act\}} \Theta^{MK}_{abcdwxyz}\sum_{\substack{s,u\\ s\neq u}}^{\in\{b,d,x,z\}}\sum_{\substack{t,v\\ t\neq v}}^{\in\{a,c,w,y\}}
- \langle \pi^{MK}_{abcdwxyz}|T^{*}_{LM,badc}\hat{E}_{uv}g(1,2)\hat{E}_{tv} |\pi^{MK}_{abcdwxyz}  \rangle
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M}\sum_{cdwxyz}^{\in\{act\}}\Theta^{MK}_{cdwxyz}   \sum_{ab}^{\notin \{act\} } \sum_{u}^{\in\{d,x,z\}}\sum_{v}^{\in\{c,w,y\}} T^{*}_{LM,badc}g(stuv)
-\end{equation*}
-\begin{equation*}
-=\sum_{L} \sum_{M}\sum_{abcdwxyz}^{\in\{act\}}\Theta^{MK}_{abcdwxyz}A^{LM}_{abcdwxyz}
-\end{equation*}
-
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} A_{badcwxyz}^{(g)}\end{equation*}
 \end{document}
-%Define a map between a set of orbital indexes $\{a,b,c,d...\}$ and a determinant index $J$:
-%\begin{equation*}
-%\Pi^{MK} : (a,b,c,d,w,x,y,z) \rightarrow J \text{\ \ \ \ such\ that \ \ \ } |J\rangle =   \hat{E}_{ba}\hat{E}_{dc}\hat{E}_{wx}\hat{E}_{yz}|K\rangle
-%\end{equation*}
-%\begin{equation*}
-%\pi^{MK} (a,b,c,d,w,x,y,z) =\pi^{MK}_{abcdwxyz}= J 
-%\end{equation*}
-%\begin{equation*}
-%\Theta^{MK}_{abcdwxyz} = c_{\pi^{MK} (a,b,c,d,w,x,y,z)} = c_{J} 
-%\end{equation*}
-%%\begin{equation*}
-%w,x,y,z \in \{active\text{\ } indices\}
-%\end{equation*}
-%\begin{equation*}
-%i,j,k,l \in \{inactive, \text{\ } active, \text{\ } virtual  \text{\ }   indices\}
-%\end{equation*}
-%Define a map between a set of orbital indexes $\{i_{1},i_{2},i_{3}i_{4}...\}$ and a determinant index:
-%\begin{equation*}
-%\Pi^{MK} : \{i_{1},i_{2},i_{3}i_{4}...i_{n}\} \rightarrow J \text{\ \ \ \ such\ that \ \ \ } |J\rangle =   \hat{E}_{ba}\hat{E}_{dc}|K\rangle
-%\end{equation*}
-%\begin{equation*}
-%\pi^{MK} (a,b,c,d,w,x,y,z) =\pi^{MK}_{abcdwxyz}= J 
-%\end{equation*}
-%\begin{equation*}
-%\Theta^{MK}_{abcdwxyz} = c_{\pi^{MK} (a,b,c,d,w,x,y,z)} = c_{J} 
-%\end{equation*}
-%\
-%satisfying $|K\rangle = \hat{E}_{\kappa\lambda}\hat{E}_{\mu\nu}|J\rangle$ with $\{\kappa,\lambda,\mu,\nu\} \subset  \{a,b,c,d,w,x,y,z\}$
