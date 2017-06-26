@@ -35,6 +35,130 @@
 \linespread{1.3}
 
 \begin{document}
+Start with $L_{PT2}$:
+\begin{equation*}
+L_{PT2}=\sum_{MN}\langle \tilde{M}|\hat{H}|\tilde{N}\rangle R_{MP}^{*}R_{NP}
++\sum_{LMN}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{H}|\tilde{N}\rangle R^{*}_{LP}R_{NP}
+-E_{s}\sum_{LMN}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{T}_{LN}|\tilde{N}\rangle R^{*}_{LP}R_{LP}
+\end{equation*}
+\begin{equation}
++\sum_{LMN}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}(\hat{f}-\epsilon_{L}^{(0)}+\epsilon_{s})\hat{T}_{LN}|\tilde{N}\rangle
++\sum_{LM}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}\hat{H}|\tilde{L}\rangle 
+\end{equation}
+\\
+First Term:
+\begin{equation*}
+ \frac{\partial}{\partial \tilde{c}_{Q,K}}\Bigg[ \sum_{MN}\langle \tilde{M}|\hat{H}|\tilde{N}\rangle R_{MP}^{*}R_{NP}\Bigg]
+\end{equation*}
+
+\begin{equation*}
+= \sum_{M}\langle \tilde{M}|\hat{H}|\tilde{K}\rangle R_{MP}^{*}R_{QP}
++ \sum_{N}\langle \tilde{K}|\hat{H}|\tilde{N}\rangle R_{QP}^{*}R_{KP}
+\end{equation*}
+\begin{equation*}
+= R_{QP}    \sum_{M}R_{MP}^{*}\sum_{J}\langle \tilde{I}|\tilde{c}_{M,J}^{\dagger}\hat{H}|\tilde{K}\rangle
++ R_{QP}^{*}\sum_{N}R_{NP}    \sum_{I}\langle \tilde{K}|\hat{H}\tilde{c}_{N,I}^{\dagger}|\tilde{I}\rangle
+\end{equation*}
+\\
+\begin{equation*}
+= R_{QP}    \Bigg[\sum_{wxyz} \sum_{M}R_{MP}^{*}\sum_{J}\langle \tilde{J}|\tilde{c}_{M,J}^{\dagger}(\hat{E}_{wx}\hat{E}_{yz}-\delta_{xy}\hat{E}_{wz})g(1,2)|\tilde{K}\rangle\Bigg]
+\end{equation*}
+\begin{equation*}
++R_{QP}^{*}\Bigg[\sum_{wxyz} \sum_{N}R_{NP}    \sum_{I}\langle \tilde{K}|(\hat{E}_{wx}\hat{E}_{yz}-\delta_{xy}\hat{E}_{wz})g(1,2)\tilde{c}_{N,I}^{\dagger}|\tilde{I}\rangle\Bigg]
+\end{equation*}
+\begin{equation*}
++R_{QP}    \Bigg[\sum_{wx} \sum_{M}R_{MP}^{*}\sum_{J}\langle \tilde{J}|\tilde{c}_{M,J}^{\dagger}\hat{E}_{wx}h(1)|\tilde{K}\rangle\Bigg]
++R_{QP}^{*}\Bigg[\sum_{wx} \sum_{N}R_{NP}    \sum_{I}\langle \tilde{K}|\hat{E}_{wx}h(1)\tilde{c}_{N,I}^{\dagger}|\tilde{I}\rangle\Bigg]
+\end{equation*}
+\\
+\begin{equation*}
+= R_{QP}    \Bigg(\sum_{M}R_{MP}^{*}\sum_{wxyz}\Theta^{M,K\dagger}_{wxyz}A^{(g)}(wxyz) +\sum_{wx}\Theta^{M,K\dagger}_{wx}A^{(h)}(wx)\Bigg)
+\end{equation*}
+\begin{equation}
+  R_{QP}^{*}\Bigg( \sum_{N}R_{NP}    \sum_{wxyz}\Theta^{N,K}_{wxyz}A^{(g)}(wxyz) +\sum_{wx}\Theta^{N,K}_{wx}A^{(h)}(wx) \Bigg)
+\end{equation}
+\\
+Second Term:
+\begin{equation}
+ \frac{\partial}{\partial \tilde{c}_{Q,K}}\Bigg[
+\sum_{LMN}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{H}|\tilde{N}\rangle R^{*}_{LP}R_{NP}
+\Bigg]
+\end{equation}
+\begin{equation*}
+=\sum_{LM}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{H}|\tilde{K}\rangle R^{*}_{LP}R_{QP}
++\sum_{LN}\langle\tilde{K}|\hat{T}_{LQ}^{\dagger}\hat{H}|\tilde{N}\rangle R^{*}_{LP}R_{NP}
+\end{equation*}
+\begin{equation}
+=\sum_{L}R^{*}_{LP}\Bigg(
+ R_{QP}\sum_{M,J}\langle\tilde{J}|\tilde{c}_{M,J}^{\dagger}\hat{T}_{LM}^{\dagger}\hat{H}|\tilde{K}\rangle 
++\sum_{N}R_{NP}\sum_{I}\langle\tilde{K}|\hat{T}_{LQ}^{\dagger}\hat{H}\tilde{c}_{N,I}|\tilde{I}\rangle 
+\Bigg)
+\end{equation}
+\\
+Third Term:
+\begin{equation*}
+ \frac{\partial}{\partial \tilde{c}_{Q,K}}\Bigg[
+-E_{s}\sum_{LMN}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{T}_{LN}|\tilde{N}\rangle R^{*}_{LP}R_{LP}
+\Bigg]
+\end{equation*}
+\begin{equation*}
+=-E_{s}\Bigg(
+ \sum_{LM}\langle\tilde{M}|\hat{T}_{LM}^{\dagger}\hat{T}_{LQ}|\tilde{K}\rangle 
++\sum_{LN}\langle\tilde{K}|\hat{T}_{LQ}^{\dagger}\hat{T}_{LN}|\tilde{N}\rangle 
+\Bigg)
+\end{equation*}
+\begin{equation}
+=-E_{s} \sum_{L}|R^{*}_{LP}|^{2}\Bigg(
+ \sum_{M,J}\langle\tilde{J}|\tilde{c}_{M,J}^{\dagger}\hat{T}_{LM}^{\dagger}\hat{T}_{LQ}|\tilde{K}\rangle 
++\sum_{N,I}\langle\tilde{K}|                         \hat{T}_{LQ}^{\dagger}\hat{T}_{LN}\tilde{c}_{N,I}|\tilde{I}\rangle 
+\Bigg)
+\end{equation}
+\\
+Fourth Term:
+\begin{equation*}
+ \frac{\partial}{\partial \tilde{c}_{Q,K}}\Bigg[
+\sum_{LMN}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}(\hat{f}-\epsilon_{L}^{(0)}+\epsilon_{s})\hat{T}_{LN}|\tilde{N}\rangle
+\Bigg]
+\end{equation*}
+\begin{equation*}
+=\sum_{LM}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}(\hat{f}-\epsilon_{L}^{(0)}+\epsilon_{s})\hat{T}_{LQ}|\tilde{K}\rangle 
++\sum_{LN}\langle\tilde{K}|\hat{\lambda}_{LQ}^{\dagger}(\hat{f}-\epsilon_{L}^{(0)}+\epsilon_{s})\hat{T}_{LN}|\tilde{N}\rangle 
+\end{equation*}
+\begin{equation*}
++\sum_{LMN}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}
+\Big(\frac{\delta\hat{f}}{\delta \tilde{c}_{Q,K}}\Big)\hat{T}_{LN}|\tilde{N}\rangle
+\end{equation*}
+Fifth Term:
+\begin{equation}
+ \frac{\partial}{\partial \tilde{c}_{Q,K}}\Bigg[
+\sum_{LM}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}\hat{H}|\tilde{L}\rangle
+\Bigg]
+\end{equation}
+\begin{equation*}
+=\sum_{M}\langle\tilde{M}|\hat{\lambda}_{LM}^{\dagger}\hat{H}|\tilde{K}\rangle 
++\sum_{L}\langle\tilde{K}|\hat{\lambda}_{LQ}^{\dagger}\hat{H}|\tilde{L}\rangle 
+\end{equation*}
+\begin{equation}
+=\sum_{M,J}\langle\tilde{J}|\tilde{c}_{M,J}^{\dagger}\hat{\lambda}_{LM}^{\dagger}\hat{H}|\tilde{K}\rangle 
++\sum_{L,I}\langle\tilde{K}|\hat{\lambda}_{LQ}^{\dagger}\hat{H}\tilde{c}_{L,I}|\tilde{I}\rangle 
+\end{equation}
+\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{equation*}
 \frac{\partial}{\partial \tilde{c}^{Q}_{K}}\Bigg[ \sum_{LMN}\langle \tilde{M}|\hat{T}_{LM}^{\dagger}\hat{H}|\tilde{N}\rangle R_{LP}^{*}R_{NP}\Bigg] 
 \end{equation*}
