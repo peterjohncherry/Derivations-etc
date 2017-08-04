@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{relsize}
+\usepackage{bbold}
+\usepackage{mathtext}
+\usepackage{pdfpages}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=35mm,
+ top=25mm,
+ bottom=25mm,
+ right=20mm,
+ }
+\usepackage{cite}
+\linespread{1.3}
+
+\begin{document}
+Using the anti-commutation relation $\{a_{i}, a_{j}\} = 0$, we can write 
+\begin{equation}
+a^{\dagger}_{i'}  a^{\dagger}_{j'}a^{\dagger}_{k'} =  \epsilon_{i'j'k'} 
+a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}    
+\end{equation}
+where $\{i',j',k\} = P \{i',j',k\}$ , $P$ is some permutation operator, and $\epsilon_{i'j'k'}$ is 
+the Levi-Cevita symbol.\\
+
+\noindent This can then be applied to contributions to the rdm derivatives:
+\begin{equation}
+\langle I | a^{\dagger}_{i'}  a^{\dagger}_{j'}a^{\dagger}_{k'}  a_{l'}  a_{m'}a_{n'}| J \rangle c_{J}  =  
+\epsilon_{i'j'k'}
+\epsilon_{l'm'n'}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   
+\end{equation}
+Each of the $\epsilon_{xyz}$ corresponds exclusively to either creation or annihilation operators, hence
+the reorderings with which they are associated correspond only to alterations of the phase, and do not affect
+the total projection. \\
+
+\noindent Recall the identity
+\begin{equation}
+\epsilon_{ijk}\epsilon_{lmn}
+=
+ \delta_{il}\delta_{jm}\delta_{kn}
+-\delta_{im}\delta_{jl}\delta_{kn}
++\delta_{im}\delta_{jn}\delta_{kl}
+-\delta_{in}\delta_{jm}\delta_{kl}
++\delta_{in}\delta_{jl}\delta_{km}
+-\delta_{il}\delta_{jn}\delta_{km}
+= \delta_{ijk}^{lmn}
+\end{equation}
+Where is the Kronecker delta. Each of the Dirac delta functions corresponds
+to a contraction between a creation and annihilation operator.
+This can be used to rewrite the contraction between the rdm derivative and the "A"-tensor:
+
+\begin{equation}
+\sum_{\substack{ ijk \\ lmn}}\Gamma^{I}_{ijklmn}A_{ijklmn}  =  
+\end{equation}
+\begin{equation}
+\sum_{\substack{ ijk \\ lmn}} \sum_{J}
+ \langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J} A_{ijklmn}  =  
+\end{equation}
+\begin{equation}
+\sum_{\substack{ ijk \\ lmn \\ i<j<k \\  l<m<n }}
+\sum_{\substack{ \{i'j'k'\} \\ \{l'm'n'\} }}
+\sum_{J}
+\epsilon_{i'j'k'}
+\epsilon_{l'm'n'}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation}
+\begin{equation}
+\sum_{\substack{ ijk \\ lmn \\ i<j<k \\  l<m<n }}
+\sum_{\substack{ \{i'j'k'\} \\ \{l'm'n'\} }}
+\sum_{J}
+\delta_{i'j'k'}^{l'm'n'}   
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation}
+\begin{equation*}
+\sum_{\substack{ ijk \\ lmn \\ i<j<k \\  l<m<n }}
+\sum_{\substack{ \{i'j'k'\} \\ \{l'm'n'\} }}
+\sum_{J}
+(\delta_{il}\delta_{jm}\delta_{kn}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
+-\delta_{im}\delta_{jl}\delta_{kn}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
++\delta_{im}\delta_{jn}\delta_{kl}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
+-\delta_{in}\delta_{jm}\delta_{kl}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
++\delta_{in}\delta_{jl}\delta_{km}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
+-\delta_{il}\delta_{jn}\delta_{km}
+\langle I | a^{\dagger}_{i}  a^{\dagger}_{j}a^{\dagger}_{k}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{ijklmn}
+\end{equation*}
+\begin{equation*}
+=\sum_{\substack{ ijk \\ lmn \\ i<j<k \\  l<m<n }}
+\sum_{\substack{ \{i'j'k'\} \\ \{l'm'n'\} }}
+\sum_{J}
+\langle I | a^{\dagger}_{l}  a^{\dagger}_{m}a^{\dagger}_{n}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{lmnlmn}
+\end{equation*}
+\begin{equation*}
+\langle I | a^{\dagger}_{m}  a^{\dagger}_{l}a^{\dagger}_{n}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{mlnlmn}
+\end{equation*}
+\begin{equation*}
+\langle I | a^{\dagger}_{m}  a^{\dagger}_{n}a^{\dagger}_{l}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{mnllmn}
+\end{equation*}
+\begin{equation*}
+\langle I | a^{\dagger}_{n}  a^{\dagger}_{m}a^{\dagger}_{l}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{nmllmn}
+\end{equation*}
+\begin{equation*}
+\langle I | a^{\dagger}_{n}  a^{\dagger}_{l}a^{\dagger}_{m}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{nlmlmn}
+\end{equation*}
+\begin{equation*}
+\langle I | a^{\dagger}_{l}  a^{\dagger}_{n}a^{\dagger}_{m}  a_{l}  a_{m}a_{n}| J \rangle c_{J}   A_{lnmlmn}
+\end{equation*}
+
+\begin{equation*}
+=\sum_{\substack{ ijk \\ lmn \\ i<j<k \\  l<m<n }}
+\sum_{\substack{ \{i'j'k'\} \\ \{l'm'n'\} }}
+\sum_{J}
+\langle I | a^{\dagger}_{l}a_{l} a^{\dagger}_{m}a_{m}a^{\dagger}_{n}a_{n}| J \rangle c_{J} 
+A_{lmnlmn} +A_{mlnlmn} +A_{mnllmn} +A_{nmllmn} +A_{nlmlmn} +A_{lnmlmn}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\noindent Hence the rdm derivative does not need to be calculated; it's anti-symmetry under
+permutation of the creation/annihilation indexes means it is possible to rewrite it
+ entirely in terms of delta functions.\\
+
+\noindent It looks as though matrix elements between different determinants vanish, which seems wrong. However,
+these interactions are still effectively present; elements of $A_{ijklmn}$ corresponding to orbitals not in $|J\rangle$ will 
+be weighted by $c_{J}$ due to the contractions and nature of the summation.
+
+\noindent This will apply to all normal ordered operators:
+\begin{equation}
+\sum_{\substack{ i_{1}...i_{N} \\ j_{1}...j_{N} \\ i_{1}<i_{2}...<i_{N} \\ j_{1}<j_{2}...<j_{N} }}
+\sum_{\substack{ \{i'_{1}...i'_{N}\} \\ \{j'_{1}...j'_{N}\} }}
+\sum_{J}
+\epsilon_{i_{1}....i_{N}}
+\epsilon_{j_{1}....j_{N}}
+\langle I | a^{\dagger}_{i_{1}}...a^{\dagger}_{i_{N}} a_{j_{1}}...a_{j_{n}}| J \rangle c_{J}   A_{i_{1}...i_{N}j_{1}...j_{N}}
+\end{equation}
+
+
+
+
+
+\end{document}
