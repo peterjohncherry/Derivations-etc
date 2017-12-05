@@ -46,9 +46,9 @@ about the operators}.\\
 
 Experimental systems are said to be in different "states". We try to describe
 state $M$ with a "wavefunction" $\Psi_{M}$ . Note this wavefuction describes
-the behavious of all the particles in the system (electrons in this case).  The
-basic properties of these states are defined in the StateInfo object, and also
-in CASPT2\_ALT. \\
+the behavious of all the particles in the system (electrons in this case)\footnote{The
+basic properties of these states are defined in the StateInfo object, Sys\_Info and also
+in CASPT2\_ALT}. \\
 
 The wavefunction is described as a linear combination of other wavefunctions:
 \begin{equation}
@@ -58,8 +58,8 @@ The wavefunction is described as a linear combination of other wavefunctions:
 
 Each $\Phi$ corresponds to a different configuration of N particles, and the
 are $c_{I}$ are coefficients defining how much each configuration contributes to the  total
-wavefunction,$Psi$\footnote{The array with elements $c_{I}$ is the CIVec
-object}. It is very important to note that the total wavefunction $\Psi$
+wavefunction,$\Psi$\footnote{The array with elements $c_{I}$ is the CIVec
+object.} It is very important to note that the total wavefunction $\Psi$
 \emph{cannot} usually be described by any single configuration of particles. \\ 
 
 To get the value of observable $x_{M}$ associated with state $\Psi_{M}$ we evaluate.
@@ -83,7 +83,7 @@ in their name contain \emph{no} actual data about the representation of the wave
 they only contain information about their structure, and instructions how to best evaluate 
 terms which involve them. Determining these instructions is what is done in the functions in the
 gamma\_generator, TensOp, MultiTensOp, CtrTensOp and CtrMultiTensOp classes, whilst all the actual
-work is carried out in the more ???\_computer and ????\_arithmetic classes.\\
+work is carried out in the ???\_computer and ????\_arithmetic classes.\\
 
 To understand how each of these classes relate to one another we need to discuss the physics a bit more.\\
 
@@ -96,8 +96,8 @@ Most observables can be boiled down to interactions between pairs of electrons. 
 
 Where $\hat{X}^{2el}$ is a two electron operator, i.e., we calculate the
 contributions to the observable from each pair of electrons seperately and then
-sum them up. In the code I refer to these are BraKets, and information about them
-is stored in the BraKet class.\\ 
+sum them up\footnote{In the code I refer to these are BraKets, and information about them
+is stored in the BraKet class}.\\ 
 
 However, as mentioned above, the wavefunction $\Psi_{M}$ does not
 correspond to single cofiguration of particles, so it is not clear how the
@@ -119,12 +119,13 @@ we calculate a lot of interactions between particles with well defined particles
 \label{eqn:2el_expectation}
 \end{equation}
 
-This is a bit nasty looking, but it is the basic kind of expression I am evaluating, so it is worth going through properly:
+This is the kind of expression I am evaluating, so it is worth going through properly:
 \begin{itemize}
 \item Here $\hat{a}_{l}$ "annihlates" particle $l$ in $\Phi_{M}$ whilst
 $\hat{a}^{\dagger}_{i}$ "creates" particle $i$. So we annihilate two particles in $\Phi_{J}$
 and then create two in $\Phi_{I}$. In other words we are exciting from I to J.
-These $\hat{a}$ operators are referred to as aops in the code. They have no numerical repsentation,
+\footnote{These $\hat{a}$ operators are referred to as aops in the code.} These $\hat{a}$ operators
+have no numerical repsentation,
 but describe how configurations relate to one another.
 \item The $X_{ijkl}$ are elements of a tensor (here, a 4-index array of floats) which describes how
 the operator $\hat{X}$ influences the interaction of particles $i$, $j$, $k$ and $l$.
@@ -138,17 +139,17 @@ calculated in the gamma\_computer class. Which gammas we need is for a given exp
 determined in the gammagenerator class, and information about the a given gamma is defined in a gamma\_info object.}.\\
 \end{itemize}
 Writing expressions like this has several advantages due to properties of the configurations
- $Phi_{J}$ and the operators $\hat{a}$. By definition
+ $\Phi_{J}$ and the operators $\hat{a}$. By definition
 \begin{equation}
-\langle \Phi_{I} | \Phi_{J} = 
+\langle \Phi_{I} | \Phi_{J} \rangle= 
 \begin{cases}
-1 \text{\  \ \ \  \ \ \ \ if } \Phi_{I} | \Phi_{J}\\ 
+1 \text{\  \ \ \  \ \ \ \ if } \Phi_{I}  = \Phi_{J}\\ 
 0 \text{ \ \ otherwise }.
 \end{cases}
 \label{eqn:overlap}
 \end{equation}
 
-In otherwords, if $\Phi_{I} | \Phi_{J}$ aren't the same, the term vanishes. However, in equantion 
+In otherwords, if $\Phi_{I}$ and $\Phi_{J}$ aren't the same, the term vanishes. However, in equantion 
 \label{eqn:2el_expectation} there are several particle creation and destruction operators between the 
 two $\Phi_{I} | \Phi_{J}$, and these operators act to transform configurations into one another. For example suppose
 I have a configuration $\Phi(1,2,3)$, which contains particles 1,2, and 3, and another configuration $\Phi(1,2,4)$ 
@@ -274,8 +275,8 @@ X^{*}_{klij}Y_{mn}Z_{opqs}\delta_{ko}\delta_{qs}\delta_{jm}=
 So in equation (\ref{eqn:wicked}) some of the indexes of X, Y and Z are being
 forced to be the same, which reduces the dimensions of everything involved and
 splits things up into two smaller operations.
-Setting two indexes the same like this is referred to as a contraction. In the code
-I often refer to pair of numbers $\{i,j\}$ as a contraction, a ctr or a delta.\\
+Setting two indexes the same like this is referred to as a contraction\footnote{In the code
+I often refer to pair of numbers $\{i,j\}$ as a contraction, a ctr or a delta.}.\\
 
 What my code does is reorders the code to reduce the number of distinct combinations of contractions,
 whilst also trying to reduce the dimension of the problem as much as possible. It then
