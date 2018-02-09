@@ -1,0 +1,213 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{relsize}
+\usepackage{bbold}
+\usepackage{mathtext}
+\usepackage{pdfpages}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=15mm,
+ top=15mm,
+ bottom=15mm,
+ right=15mm,
+ }
+
+\usepackage{cite}
+\linespread{1.3}
+
+\begin{document}
+Partitition the space up into three subspaces :
+\begin{itemize}
+\item (R) : Reference space; constructed from CASSCF wavefunctions corresponded to the states of interest.
+\item (A) : CASCI space minus the reference space.
+\item (X) : External space constructed from determinants obtained by applying excitation operators to the determinants within the CASCI space.
+\end{itemize}
+These three spaces are orthogonal to one another.\\
+
+\noindent Use them to write the eigenvalue problem:
+\begin{equation}
+\mathbf{Hc} = \mathbf{cE}
+\end{equation}
+
+\begin{equation*}
+\begin{bmatrix}
+[H^{(RR)}]&[H^{(RA)}]&[H^{(RX)}]\\
+[H^{(AR)}]&[H^{(AA)}]&[H^{(AX)}]\\
+[H^{(XR)}]&[H^{(XA)}]&[H^{(XX)}]
+\end{bmatrix}
+\begin{bmatrix}
+[c^{(RR)}]&[c^{(RA)}]&[c^{(RX)}]\\
+[c^{(AR)}]&[c^{(AA)}]&[c^{(AX)}]\\
+[c^{(XR)}]&[c^{(XA)}]&[c^{(XX)}]
+\end{bmatrix}
+\end{equation*}
+\begin{equation}
+=
+\begin{bmatrix}
+[c^{(RR)}]&[c^{(RA)}]&[c^{(RX)}]\\
+[c^{(AR)}]&[c^{(AA)}]&[c^{(AX)}]\\
+[c^{(XR)}]&[c^{(XA)}]&[c^{(XX)}]
+\end{bmatrix}
+\begin{bmatrix}
+[E^{RR}]& [0]& [0]\\
+[0]& [E^{AA}]& [0]\\
+[0]& [0]&      [E^{CC}]
+\end{bmatrix}
+\end{equation}
+\noindent From which we can get the set of equations :
+\begin{equation}
+H^{(RR)}c^{(RR)}+H^{(RA)}c^{(AR)}+H^{(RX)}c^{(XR)}= c^{(RR)}E^{(RR)}
+\end{equation}
+\begin{equation}
+H^{(AR)}c^{(RA)}+H^{(AA)}c^{(AA)}+H^{(AX)}c^{(XA)}= c^{(AA)}E^{(AA)}
+\end{equation}
+\begin{equation}
+H^{(XR)}c^{(RX)}+H^{(XA)}c^{(AX)}+H^{(XX)}c^{(XX)}= c^{(XX)}E^{(XX)}
+\end{equation}
+\noindent For a particular state, $\nu$, this can be written in index notation as
+%\begin{equation}
+%\sum_{k} H_{ik}c_{kj}
+%+\sum_{f}H_{if}c_{fj}
+%+\sum_{x}H_{iz}c_{zj}
+%= \sum_{k}c_{ik}E_{\nu},
+%\end{equation}
+%\begin{equation}
+%\sum_{k}  H_{ik}c_{ke}
+%+\sum_{f} H_{df}c_{fe}
+%+\sum_{x} H_{iz}c_{ze}
+%= \sum_{k}c_{df}E_{\nu},
+%\end{equation}
+%\begin{equation}
+%\sum_{k} H_{wk}c_{kx}
+%+\sum_{f}H_{wf}c_{fx}
+%+\sum_{x}H_{wz}c_{zx}
+%= \sum_{z}c_{wz}E_{\nu}.
+%\end{equation}
+\begin{equation}
+\sum_{k} H_{ik}c_{k\nu}
++\sum_{f}H_{if}c_{f\nu}
++\sum_{x}H_{iz}c_{z\nu}
+= \sum_{k}c_{ik}E_{\nu},
+\end{equation}
+\begin{equation}
+\sum_{k}  H_{ik}c_{k\nu}
++\sum_{f} H_{df}c_{f\nu}
++\sum_{x} H_{iz}c_{z\nu}
+= \sum_{f}c_{f\nu}E_{\nu},
+\end{equation}
+\begin{equation}
+\sum_{k} H_{wk}c_{k\nu}
++\sum_{f}H_{wf}c_{f\nu}
++\sum_{x}H_{wz}c_{z\nu}
+= \sum_{z}c_{z\nu}E_{\nu}.
+\end{equation}
+
+\noindent In the above and from now on the following convention is used for indexes;
+ $i,j,k,l \in R$,  $d,e,f \in A$, and $w,x,y,z \in X$. \\
+
+\noindent  If the reference space, \emph{R}, is well seperated energetically from the 
+remainder of the active space then we can assume that $[c^{(RA)}]\approx[c^{(AR)}]\approx 0 $.
+This leaves us with the following equations for a state $\nu \in R$:
+\begin{equation}
+\sum_{k} H_{ik}c_{k\nu}
++\sum_{z}H_{iz}c_{z\nu}
+= \sum_{k}c_{\nu k}E_{\nu}
+\label{eqn:RrowHc}
+\end{equation}
+\begin{equation}
+\sum_{k} H_{wk}c_{k\nu}
++\sum_{x}H_{wz}c_{z\nu}
+= \sum_{z}c_{\nu z}E_{z\nu}.
+\label{eqn:XrowHc}
+\end{equation}
+\noindent Rearranging (\ref{eqn:XrowHc}) to get an expression for $c^{(XR)}_{ y\nu}$ ( $y \in X$, $\nu \in R$);
+\begin{equation}
+c_{y\nu} = -\sum_{zk}[[H^{(XX)}]-E_{\nu}[I^{(XX)}]]^{-1}_{yz}H_{zk}c_{k\nu},
+\label{eqn:cXRfrominverse}
+\end{equation}
+\noindent where $[I^{(XX)}]$ is the representation of the identity on the external space $X$. This
+expression for $ c_{y\nu}$  may be substitued back into (\ref{eqn:RrowHc}) to obtain
+\begin{equation}
+\sum_{k} H_{ik}c_{k\nu}
++\sum_{y}H_{iy}\sum_{zk}([H^{(XX)}]-E_{\nu}[I^{(XX)}])^{-1}_{yz}H_{zk}c_{k\nu}
+= \sum_{k}c_{\nu k}E_{\nu}
+\label{eqn:RrowHcsub}
+\end{equation}
+\noindent This would need to be solved iteratively, due to appearance of $E_{\nu}$ on both
+sides of the equation. This is problematic as calculating matrix inverses can prove expensive,
+and we would need to calculate the inverse again for every new guess at $E_{\nu}$. To try and deal with this
+we write
+\begin{equation}
+E_{\nu} = E_{\nu}^{0}+\Delta E_{\nu} 
+\end{equation}
+\noindent leading to
+\begin{equation} 
+[[H^{(XX)}]-E_{\nu}[I^{(XX)}]]^{-1} = ([C]+[D])^{-1}, 
+\end{equation}
+\noindent where
+\begin{equation}
+[C] = [H^{(XX)}]-E^{0}_{\nu}[I^{(XX)}]
+\end{equation}
+\begin{equation}
+[D] = \Delta E_{\nu} [I^{(XX)}] 
+\end{equation}  
+Now using the identity $(C+D)^{-1} = (1+C^{-1}D)D^{-1}$ we write : 
+\begin{equation}
+([H^{(XX)}]-E_{\nu}[I^{(XX)}])^{-1} =
+(1-\Delta E_{\nu}V^{-1})V , 
+\end{equation}
+\noindent where $V = (H^{(XX)}-E^{0}_{\nu}[I^{(XX)}])$. Provided
+ $\Delta E_{\nu}$ is small we can write this as a series;
+\begin{equation}
+(1-\Delta E_{\nu}V^{-1})= \sum_{q}^{\infty} (\Delta E_{\nu}V^{-1})^{q}
+\end{equation}
+Substituing back into (\ref{eqn:RrowHcsub}) and approximating to terms in $(\Delta E ^{2})$ we get
+\begin{equation}
+\sum_{k} H_{ik}c_{k\nu}
++\sum_{y}H_{iy}\sum_{zkx}(1+ E_{\nu}V^{-1}+ (E_{\nu}V^{-1})^{2})_{yx}V_{xz}H_{zk}c_{k\nu}
+= \sum_{k}c_{\nu k}E_{\nu}
+\label{eqn:RrowHc_series}
+\end{equation}
+The advantage of this is that we need only calculate the inverse of $V$, which is independent of $\Delta E$, and so
+need only be calculated once during the determination of $c_{k \nu}$.\\
+
+\noindent The members, $|w\rangle $, of space X are given by applying excitation operators to the wavefunctions 
+$|\nu\rangle$, which form the reference space; 
+\begin{equation}
+|w\rangle = a_{s}^{\dagger}a_{t}^{\dagger}a_{p}a_{s}|I\rangle c_{I\nu}
+\end{equation}
+where I is a determinant in the active space, $s$ and $t$ may be virtual
+or active indexes, whilst $p$ and $s$ may be core or active indexes. It is forbidden for
+both $s$ and $t$ to be active. Hence the elements of the  $[H^{XX}]$ block are given by
+\begin{equation}
+\sum_{IJ}
+d^{\dagger}_{I\nu}\langle I | a_{s}a_{t}a_{p}^{\dagger}a_{s}^{\dagger}
+\hat{H}
+a_{s}^{\dagger}a_{t}^{\dagger}a_{p}a_{s}|J\rangle d_{J\nu}
+=
+d^{\dagger}_{I\nu}\langle I |\hat{E}^{\dagger}_{\Omega} 
+\hat{H} \hat{E}^{\dagger}|I\rangle d_{J\nu}.
+\end{equation}
+It is notable that this means that the definition of the external space is dependent upon the 
+reference state $\nu$, which is obviously rather bad...
+\end{document}
