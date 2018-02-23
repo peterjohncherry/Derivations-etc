@@ -36,320 +36,35 @@
 
 \begin{document}
 
-\section{background}
-
-In experiments we measure "observable values". Denote one such variable as $x$.
-To be clear $x$ is a number (not a matrix, operator, function  etc.). Each
-observable corresponds to an operator $\hat{X}$. The hat $\hat{ }$ means this is
-an operator\footnote{Instantiations of the TensOp class contain information
-about the operators}.\\
-
-Experimental systems are said to be in different "states". We try to describe
-state $M$ with a "wavefunction" $\Psi_{M}$ . Note this wavefuction describes
-the behavious of all the particles in the system (electrons in this case)\footnote{The
-basic properties of these states are defined in the StateInfo object, Sys\_Info and also
-in CASPT2\_ALT}. \\
-
-The wavefunction is described as a linear combination of other wavefunctions:
+The program is intended to help with evaluation of the many index expressions which arise in multi-reference pertrbation theory. 
+Essentially, it aims to evaluate one of the follwing three kinds of expressions, the simplest of which is
 \begin{equation}
-\Psi_{M} = \sum_{I} c_{I}\Phi_{I},
-\label {eqn:CI_wfn}
+\langle M | \hat{X} \hat{Y} ... | N \rangle,
 \end{equation}
+where  $| N \rangle$  is a multireference wavefunction represented as a linear combination of determinants, $|I\rangle $;
+\begin{equation}
+|N\rangle = \sum_{I} c_{I}^{N}| I \rangle.
+\end{equation} 
+It can also calculate the derivative of the above expression with respect to one of the coefficients $c_{I}$:
+\begin{equation}
+\langle M | \hat{X} \hat{Y} ... | I \rangle.
+\end{equation}
+Similary, it can calculate the derivative with respect to   
 
-Each $\Phi$ corresponds to a different configuration of N particles, and the
-are $c_{I}$ are coefficients defining how much each configuration contributes to the  total
-wavefunction,$\Psi$\footnote{The array with elements $c_{I}$ is the CIVec
-object.} It is very important to note that the total wavefunction $\Psi$
-\emph{cannot} usually be described by any single configuration of particles. \\ 
-
-To get the value of observable $x_{M}$ associated with state $\Psi_{M}$ we evaluate.
+In the second quantized representation we can write this as
+\begin{equation}
+z = \sum_{\substack{ x_{1}x_{2}...\\ y_{1}y_{2}... \\ ...}} X_{x_{1}x_{2}...} Y_{y_{1}y_{2}...} ...
+\sum_{I}\sum_{J}
+\langle I | a^{\dagger}_{x_{1}} a_{x_{2}}...a^{\dagger}_{y_{1}}a_{y_{2}}....| J \rangle 
+ c^{\dagger}_{I}c_{J}
+\end{equation}
 
 \begin{equation}
-\langle \Psi_{M} | \hat{X}| \Psi_{M} \rangle
+x = \rangle M | \hat{A} \hat{B}...... | N \rangle
 \end{equation}
 
-The $\langle |$ part is the "Bra" member of the GammaInfo object, whilst the "Ket" is the $| \rangle$.
-\footnote{These obtained results are stored in the scalar\_results\_map}.\\
 
-The $\langle | | \rangle$ is associated with the method used to evaluate these
-terms.  Do not worry about it, just bear in mind that $\hat{X} |\Psi_{M}
-\rangle$ is \emph{not} $\hat{X}$ times $\Psi_{M}$; neither $\hat{X}$ nor $\Psi$ have any
-defined numerical representation. The idea is that provided we represent $\hat{X}$
-and $\Psi$ in a manner which preserves their logical structure and relationship
-to one another, the result of the above expression is the same. \\
- 
-This has informed how the program is written; in general all classes with info
-in their name contain \emph{no} actual data about the representation of the wavefunction or operators,
-they only contain information about their structure, and instructions how to best evaluate 
-terms which involve them. Determining these instructions is what is done in the functions in the
-gamma\_generator, TensOp, MultiTensOp, CtrTensOp and CtrMultiTensOp classes, whilst all the actual
-work is carried out in the ???\_computer and ????\_arithmetic classes.\\
+where $x$ is a scalar. This is  
 
-To understand how each of these classes relate to one another we need to discuss the physics a bit more.\\
 
-Most observables can be boiled down to interactions between pairs of electrons. This means we can rewrite the above expression as
-
-\begin{equation}
-\sum_{\substack{electron \\ pairs}} \langle \Psi_{M} | \hat{X}^{2el}| \Psi_{M} \rangle
-\label{eqn:2el_inter}
-\end{equation}
-
-Where $\hat{X}^{2el}$ is a two electron operator, i.e., we calculate the
-contributions to the observable from each pair of electrons seperately and then
-sum them up\footnote{In the code I refer to these are BraKets, and information about them
-is stored in the BraKet class}.\\ 
-
-However, as mentioned above, the wavefunction $\Psi_{M}$ does not
-correspond to single cofiguration of particles, so it is not clear how the
-summation over electron pairs can be accomplished. In order to do so we must
-use the representation defined in equation (\ref{eqn:CI_wfn}). Substituting
-equation (\ref{eqn:CI_wfn}) into (\ref{eqn:2el_inter}) we obtain:
-
-\begin{equation}
-\sum_{\substack{electron \\ pairs}}\sum_{IJ}
- c^{M}_{I}\langle \Phi_{I} | \hat{X}^{2el} | \Phi_{J} \rangle c_{J}^{M}
-\label{eqn:2el_inter_2}
-\end{equation}
-
-Now, instead of calculating a single interaction between two wavefunctions with ill-defined particles,
-we calculate a lot of interactions between particles with well defined particles. This can now be rewritten: 
-
-\begin{equation}
-\sum_{ijkl}\sum_{IJ} c_{M}^{I}\langle \Phi_{I} | \hat{a}_{i}^{\dagger}\hat{a}_{j}^{\dagger}\hat{a}_{k}\hat{a}_{l} | \Phi_{J} \rangle c_{J}^{M} X_{ijkl}
-\label{eqn:2el_expectation}
-\end{equation}
-
-This is the kind of expression I am evaluating, so it is worth going through properly:
-\begin{itemize}
-\item Here $\hat{a}_{l}$ "annihlates" particle $l$ in $\Phi_{M}$ whilst
-$\hat{a}^{\dagger}_{i}$ "creates" particle $i$. So we annihilate two particles in $\Phi_{J}$
-and then create two in $\Phi_{I}$. In other words we are exciting from I to J.
-\footnote{These $\hat{a}$ operators are referred to as aops in the code.} These $\hat{a}$ operators
-have no numerical repsentation,
-but describe how configurations relate to one another.
-\item The $X_{ijkl}$ are elements of a tensor (here, a 4-index array of floats) which describes how
-the operator $\hat{X}$ influences the interaction of particles $i$, $j$, $k$ and $l$.
-\footnote{These tensors are stored in TensOp\_data\_map, note that the corresponding in TensOp object
-does not contain this data, it only has a name so it can be fetched from the map. }  \\
-\item The matrix with elements
-$\sum_{IJ} c^{M}_{I}\langle \Phi_{I} | \hat{a}_{i}^{\dagger}\hat{a}_{j}^{\dagger}\hat{a}_{k}\hat{a}_{l} | \Phi_{J} \rangle c_{J}^{M}  $
-is referred to as the (2-electron reduced) density matrix, and defines how the different configurations interact. For various reasons,
-I will refer to them as gammas, here and in the code. \footnote{The elements of gammas are stored in Gamma\_data\_map, are
-calculated in the gamma\_computer class. Which gammas we need is for a given expressions is
-determined in the gammagenerator class, and information about the a given gamma is defined in a gamma\_info object.}.\\
-\end{itemize}
-Writing expressions like this has several advantages due to properties of the configurations
- $\Phi_{J}$ and the operators $\hat{a}$. By definition
-\begin{equation}
-\langle \Phi_{I} | \Phi_{J} \rangle= 
-\begin{cases}
-1 \text{\  \ \ \  \ \ \ \ if } \Phi_{I}  = \Phi_{J}\\ 
-0 \text{ \ \ otherwise }.
-\end{cases}
-\label{eqn:overlap}
-\end{equation}
-
-In otherwords, if $\Phi_{I}$ and $\Phi_{J}$ aren't the same, the term vanishes. However, in equantion 
-\label{eqn:2el_expectation} there are several particle creation and destruction operators between the 
-two $\Phi_{I} | \Phi_{J}$, and these operators act to transform configurations into one another. For example suppose
-I have a configuration $\Phi(1,2,3)$, which contains particles 1,2, and 3, and another configuration $\Phi(1,2,4)$ 
-containing particles 1,2 and 4. We can use the creation and annhiliation operators, $\hat{a}_{4}$
-and $\hat{a}_{3}^{\dagger}$  to transform between these two configurations;
-\begin{equation}
-|\Phi(1,2,3)\rangle = \hat{a}_{3}^{\dagger}\hat{a}_{4} |\Phi(1,2,4)\rangle.
-\end{equation}
-What's happening here is that the operator $\hat{a}_{4}$ destroys particle $4$ in $\Phi(1,2,4)$, and then 
-operator $\hat{a}^{\dagger}_{3}$ fills this whole with particle $3$. So if we now revist equation (\ref{eqn:overlap})
-we can now get the relation 
-\begin{equation}
-\langle \Phi(1,2,4) |\hat{a}_{i}^{\dagger}\hat{a}_{j} \Phi(1,2,4) =
-\begin{cases}
-1 \text{\  \ \ \  \ \ \ \ if } i=3 \text{ \ \ and \ \ } j =4 \\
-0 \text{ \ \ otherwise }. 
-\end{cases}
-\label{eqn:overlap_specific}
-\end{equation}
-
-As we can see now, which terms contribute to \label{eqn:2el_expectation} depend on which configurations $\Phi$ we are using to 
-define the total wavefunciton $\Phi$, and which particles our operator $\hat{X}$ acts on. For example, we may know that 
-our observable  is only significanlty influenced by those electrons in the outermost shells, enabling us to skip many terms in the 
-summaiton. Furthermore, our operator $\hat{X}$ may have internal symmetries, reducing the number of unique elements $X_{ijkl}$ 
-we need to store.\\
-
-The purpose of my code is to take advantage of these symmetries and range constraints. It should do it automatically,
-and for any number of operators, whose symmetries and range constraints are specified by functions input by the used. The 4-index term above
-is not actually problematic. But to calculate the things I am interested in I have a dozen or so terms looking like this
-\begin{equation}
-\sum_{IJ} c_{NI}\langle \Phi_{N} |
-\hat{a}_{i}
-\hat{a}_{j}
-\hat{a}_{k}^{\dagger}
-\hat{a}_{l}^{\dagger}
-\hat{a}_{m}^{\dagger}
-\hat{a}_{n}
-\hat{a}_{o}^{\dagger}
-\hat{a}_{p}^{\dagger}
-\hat{a}_{q}
-\hat{a}_{s}
- | \Phi_{J} \rangle c_{JM}  
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\label{eqn:original}
-\end{equation}
-We can never store the relevant arrays; they are too large. However, the creation and annhilation operators possess a
-permutation symmetry which enables us to rewrite
-the above 10-index term, as several (often ~100 or so) terms with fewer indexes:
-=
-\begin{equation}
-\sum_{\nu}^{ \nu \in \{\Omega^{(1)}_{\nu}\}}
-\sum_{ijklmnopqr}
-\gamma_{k'l'm'n'o'p'q'r'}
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\delta_{i'j'}
-\end{equation}
-
-\begin{equation}+
-\sum_{\nu}^{ \nu \in \{\Omega^{(2)}_{\nu}\}}
-\sum_{ijklmnopqr}
-\gamma_{m'n'o'p'q'r'}
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\delta_{i'j'}\delta_{k'l'}
-\end{equation}
-
-\begin{equation}+
-\sum_{\nu}^{ \nu \in \{\Omega^{(3)}_{\nu}\}}
-\sum_{ijklmnopqr}
-\gamma_{o'p'q'r'}
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\delta_{i'j'}\delta_{k'l'}\delta_{m'n'}
-\end{equation}
-\begin{equation}+
-\sum_{\nu}^{ \nu \in \{\Omega^{(4)}_{\nu}\}}
-\sum_{ijklmnopqr}
-\gamma_{q'r'}
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\delta_{i'j'}\delta_{k'l'}\delta_{m'n'}\delta_{o'p'}
-\end{equation}
-\begin{equation}
-\sum_{\nu}^{ \nu \in \{\Omega^{(5)}_{\nu}\}}
-\sum_{ijklmnopqr}
-X^{*}_{klij}Y_{mn}Z_{opqs}
-\delta_{i'j'}\delta_{k'l'}\delta_{m'n'}\delta_{o'p'}\delta_{q'r'}
-\label{eqn:wicked}
-\end{equation}
-
-where 
-\begin{equation}
-\gamma_{ijkl} =\sum_{IJ} c^{M}_{I}\langle \Phi_{I} | \hat{a}_{i}^{\dagger}\hat{a}_{j}^{\dagger}\hat{a}_{k}\hat{a}_{l} | \Phi_{J} \rangle c_{J}^{M}  
-\end{equation}
-
-The primed indices are obtained by applying the permutation operation
-$\Omega$ to the set of unprimed indexes, i.e.,
-\begin{equation}
- \{i'j'k'l'm'n'o'p'q'r'\} = \Omega\{ijklmnopqr\}.
-\end{equation}
-The outer summation in equation \ref{eqn:wicked} runs over different permutations (there is a way of figuring out
-which ones you need). So this outer summation is a sum over possible relabellings of the indexes,
-not values of the indexes themselves.\\
-
-The $\delta_{x'y'}=  0$ if $x'\neq y'$ and 1 otherwise.  Hence, the permutation in the outer summation
-combined with the delta functions is expresses that each different term in the summation involves
-the same baisc tensors, but with different indexes set equal.
-For example, in the four index term;
-\begin{equation}
-\sum_{\nu}^{ \nu \in \{\Omega^{(5)}_{\nu}\}}
-\sum_{ijklmnopqr}
-\gamma_{o'p'q'r'}
-X^{*}_{klij}Y_{mn}Z_{opqs}\delta_{i',j'}\delta_{k'l'}\delta_{m'n'}
-\end{equation}
-one contribution might have $i'=k$ , $j'=k$, $k'=q$, $l'=s$, $m'=j$ and $n'=m$;
-\begin{equation}
-\sum_{ijklmnopqr}
-\gamma_{ilnr}
-X^{*}_{klij}Y_{mn}Z_{opqs}\delta_{ko}\delta_{qs}\delta_{jm}= 
-\sum_{ilnr}
-\gamma_{ilnr}
-\sum_{jkmoqs}
-X^{*}_{klij}Y_{mn}Z_{opqs}\delta_{ko}\delta_{qs}\delta_{jm}= 
-\end{equation}
-
-So in equation (\ref{eqn:wicked}) some of the indexes of X, Y and Z are being
-forced to be the same, which reduces the dimensions of everything involved and
-splits things up into two smaller operations.
-Setting two indexes the same like this is referred to as a contraction\footnote{In the code
-I often refer to pair of numbers $\{i,j\}$ as a contraction, a ctr or a delta.}.\\
-
-What my code does is reorders the code to reduce the number of distinct combinations of contractions,
-whilst also trying to reduce the dimension of the problem as much as possible. It then
-generates an list of operations which need to be performed to evaluate these
-expressions; the difficulty is that there are numerous different orders in
-which these expressions can be evaluated, some of which are much more efficient
-than others. So basically the code contains an automatic equation rearranger. 
-This is necessary, as the number of terms in the rearranged expression is large,
-so it cannot be done by hand for all different quantities.\\
-
-How to best rearrange the terms is dependent on the range constraints on the
-indexes and the internal symmetries of the operators. Getting it to take 
-advantage of this is the hard part. Furthermore, there  are often lots
-of different BraKets being calculated. The contributions to each
-BraKet are different but ultimately many can be merged together, and some 
-can be known to be equivalent or vanish due to properties of the system. Accounting
-for this can be tricky. \\
-
-The meat of all this is rearrangement is done in CtrTensOp and
-gamma\_generator.  Information about a block of tensor is stored in a CtrTensOp
-object (CTP = contracted tensor part).  For example, $X_{ijkl}$ are the elements
-of a CTP.  If I have multiple tensors in one expression ($XYZ$), I stored this
-information in CtrMultiTensOp object (CMTP = contracted multi tensor part).
-For example, $T_{qrst}X_{ijkl}$ are elements of a CTP.  Contracting indexes on
-two different tensors takes us from a CMTP to a CTP, e.g.,
-$\sum_{t}T_{qrst}X_{ijkl}\delta_{ti}=A_{qrsjkl} $.  The effect of contracting
-indexes on different tensors effectively fuses those tensors so they can no
-longer be seperated, and their symmetries and contraints must be combined.
-Generally speaking I start with a CMTP object, and then must contract it to get
-a CTP object, and then contract this in lots of different ways. This is done in
-a full\_contract in CtrTensOp.  \\
-
-It is important to note that the tensors are split up into blocks corresponding
-to different ranges (these range blocks are nothing to do with the
-parallelism). Each CTP and CMTP object only corresponds to a certain range
-block. So there are several different CMTP objects for every tensor.  A list of
-all possible ranges for a given tensor is specfied in the all\_ranges member of
-the TensOp and MultiTensOp classes.\\
-
-Which terms are includes in equation\ref{eqn:wicked} are dependent on the range
-blocks. The list of contributing terms, with their range blocks, is determined
-in gamma generator.  Which terms need to be calculated (there may be
-intermediate terms, some terms can be combined etc.,) is determined in the full
-contract functions in CtrTensOp. \\
-
-CtrTensOp generate a task list, which is executed by expression computer.
-Expression computer then calls tensor arithmetic,  and gamma computer, The
-former contains the acual linear algebra routines for contracting the tensors,
-whilst the latter contains routines for calculating 
-the $\gamma_{ijkl} =\sum_{IJ} c_{NI}\langle \Phi_{N} |
-\hat{a}_{i}^{\dagger}
-\hat{a}_{j}
-\hat{a}_{k}^{\dagger}
-\hat{a}_{l}
-| \Phi_{J} \rangle c_{JM}  $ type terms.
-
-In conclusion, the basic proceedure is 
-\begin{itemize}
-\item Things start in src/smith/caspt/CASPT2\_ALT.cc, but most of the code is in /src/smith/wicktool .
-\item First instantiate a Sys\_Op object which contains loads of background information. 
-\item Put information about the wavefunction (states\_info objects) and  operators (TensOp objects) into the Sys\_Op object.
-\item TensOp will define all possible sub blocks and contractions, and identify equivalencies, but will not do any actual calculations.
-\item Instantiate a Expression\_Info object which contains the actual mathematical expressions I want to calculate.
-\item Expression Info will then generate some  BraKet objects, each of which corresponds to a term like . 
-\item The Bracket will then run the gamma generator to see which terms contribute.
-\item The gamma\_generator will produce the gamma\_info objects, and also CtrTenOp objects containing information about the terms
-we need to calculate.
-\item Full contract (in CtrTensOp) then runs on each of these CTP and CMTP objects, which will provide a list of the linear algebra operations
-we need to do.
-\item Each gamma object will have a seperate task list (ACompute\_list), which contains all the contracted operators which need 
-to be contracted with that gamma (n.b. matrix multiplication is a special case of contraction). Each of these lists is put into the G\_to\_A\_map;
-the key is the name of the gamma matrix, whilst the mapped object is the ACompute list.
-\item Then the initial data about the wavefunction and operators to generate an expression\_computer member of Sys\_Op. 
-\item This expression\_computer object is then used to execute the various lists as described above.\\
-\end{itemize}
 \end{document}

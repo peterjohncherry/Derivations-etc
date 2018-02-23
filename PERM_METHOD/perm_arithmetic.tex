@@ -42,7 +42,7 @@ Have tensor
 A_{ijkl...}
 \end{equation}
 
-\noindent Have a set of possible ranges each index may take. Define a set of numbers, $\{r\}_{r=0,..,N_{ranges}} $,
+\noindent Have a set of possible ranges each index may take. Define a set of numbers, $\{r\}_{r=0,..,N_{R}} $,
 each one of which corresponds to a different range.\\
 
 \noindent Write a block as
@@ -50,13 +50,13 @@ each one of which corresponds to a different range.\\
 A_{ijkl...}^{r_{i} r_{j}r_{k}r_{l}...}
 \end{equation}
 
-\noindent Any given block can be uniquely identified with a number, $B$, in base $N_{ranges}$:
+\noindent Any given block can be uniquely identified with a number, $B$, in base $N_{R}$:
 
 \begin{equation}
-B = \sum_{q_{p}}^{N_ids} r_{q_{p}}N_{ranges}^{q_{p}}
+B = \sum_{q_{p}}^{N_{I}} r_{q_{p}}N_{R}^{q_{p}}
 \end{equation}
 
-\noindent where $N_{ids}$ is the number of indexes. Here $q_{p}$ is the position of index $q$. E.g., 
+\noindent where $N_{I}$ is the number of indexes. Here $q_{p}$ is the position of index $q$. E.g., 
 for $A_{ijqkl}$  $q_{p} = 2$.  We now write a block as
 \begin{equation}
 A_{ijkl...}^{B}
@@ -66,7 +66,33 @@ A_{ijkl...}^{B}
 swapping the ranges of indexes $i$ and $j$ has the following effect on the Block number:
  
 \begin{equation}
-swap_{ij}(B)  = B  - r_{i_{p}}(N_{ranges}^{i_{p}} - N_{ranges}^{j_{p}}) + r_{j_{p}}(N_{ranges}^{j_{p}} - N_{ranges}^{i_{p}})
+swap(\{i,j\},B)  = B  - r_{i_{p}}(N_{R}^{i_{p}} - N_{R}^{j_{p}}) + r_{j_{p}}(N_{R}^{j_{p}} - N_{R}^{i_{p}})
 \end{equation}
+
+\noindent  However, it is not clear what arithmetic operation would correspond to a contraction over two (or more)
+indexes. One way of defining such arithmetic opeartions would be to increase the size of the basis.
+
+\begin{equation}
+N_{b} = 2N_{R} + N_{I}
+\end{equation}
+
+\noindent We now define our block number as:
+
+\begin{equation}
+B = \sum_{q_{p}}^{N_{I}} r_{q_{p}}N_{b}^{q_{p}}.
+\end{equation}
+
+\noindent As before, the arithmetic operation corresponding to the swapping of two indexes is
+ 
+\begin{equation}
+swap(\{i,j\},B)  = B  - r_{i_{p}}(N_{b}^{i_{p}} - N_{b}^{j_{p}}) + r_{j_{p}}(N_{b}^{j_{p}} - N_{b}^{i_{p}}).
+\end{equation}
+
+\noindent A contraction of two indexes corresponds to:
+\begin{equation}
+contract(\{i,j\},B)  = B + (j+N_{R})N_{b}^{i_{p}} + (i+N_{R})N_{b}^{j_{p}}.
+\end{equation}
+
+
 
 \end{document}

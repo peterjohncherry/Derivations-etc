@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{relsize}
+\usepackage{bbold}
+\usepackage{mathtext}
+\usepackage{pdfpages}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=35mm,
+ top=25mm,
+ bottom=25mm,
+ right=20mm,
+ }
+\usepackage{cite}
+\linespread{1.3}
+
+\begin{document}
+\begin{equation*}
+\sum_{L} \sum_{M}\sum_{J}\sum_{\substack{abcd\\ wxyz}} 
+\langle J |\tilde{c}^{\dagger}_{M,J} T^{\dagger}_{LM,abcd}(\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d})(\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z})g(ijkl)|K\rangle
+\end{equation*}
+where $\{k,l\}\subset \{a,c,w,y\}$ and $\{i,j\}\subset \{b,d,x,z\}$
+\noindent Define a map between a set of orbital indexes $\{a,b,c,d,w,x,y,z\}$ and a determinant index:
+\begin{equation*}
+\Pi^{MK} : \{a,b,c,d,w,x,y,z\} \rightarrow J
+ \text{ \ \ \ \ \ \ \ \ \ \ } | J\rangle = \hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}|K\rangle 
+\end{equation*}
+\begin{equation*}
+\pi^{K} (a,b,c,d,w,x,y,z) =\pi^{K}_{abcdwxyz}= J 
+\end{equation*}
+\begin{equation*}
+\Theta^{MK}_{abcdwxyz} = c_{M,\pi^{K}_{abcdwxyz}} = c_{M,J} 
+\end{equation*}
+These expressions can be used to rewrite the above expressions without a sum over $J$:
+\begin{equation*}
+\text{(1) = } \sum_{L} \sum_{M}  \sum_{\substack{abcd\\ wxyz}}\Theta^{MK\dagger}_{abcdwxyz} \langle \pi^{MK}_{abcdwxyz} |T^{*}_{LM,badc}g(ijkl)|K\rangle
+\end{equation*}
+Note that $|J\rangle$ and $|K\rangle$ are orthogonal to
+any to determinants with orbitals in the virtual space occupied\footnote{assuming preservation of the number of electrons},
+or orbitals in the inactive space unoccupied. This enables further simplification of the above expressions via grouping together
+different ranges, i.e., inactive, active, virtual, for the indexes, $a,b,c,d$, of the MS-CASPT2 amplitudes, $T_{LM,abcd}$:\\
+
+\noindent If $a,b,c,d \notin \{active\} $, then $\{i,j,k,l\} $= $\{b,a,d,c\}$.
+ 
+\begin{equation*}
+ \sum_{M} \sum_{J} \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}}
+ c^{\dagger}_{M,J}  \langle J|T^{*}_{LM,badc}\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
+\end{equation*}
+ 
+\begin{equation*}
+= \sum_{M}  \sum_{abcd}^{\notin \{act\} } \sum_{wxyz}^{\in\{act\}} 
+c^{\dagger}_{M,\pi^{K}_{wxyz}}
+ \sum_{abcd}^{\notin \{act\} }  \langle K |T^{*}_{LM,badc}g(badc) |K  \rangle s(badc, wxyz)
+\end{equation*}
+ 
+\begin{equation*}
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} c^{\dagger}_{M,\pi^{K}_{wxyz}}  A^{(g)}
+\end{equation*}
+where $s(badc,wxyz)$ is $\pm 1$ as determined by the anti-commutation relations of the creation annihilation operators.
+
+\noindent If $a,b \notin \{active\} $ and $c,d \in \{active\}$, then
+\begin{equation*}
+ \sum_{M}  \sum_{ab}^{\notin \{act\} } \sum_{cdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,J}  \langle J|T^{*}_{LM,badc}\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
+\end{equation*}
+\begin{equation*}
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} 
+\sum_{cd}^{\in\{act\}}  c^{\dagger}_{M,\pi^{K}_{dcwxyz}}
+\sum_{ab}^{\notin \{act\} }
+T^{*}_{LM,badc}
+\sum_{\{v\}}^{\subset\{d,x,z\}}\sum_{\{u\}}^{\subset\{c,w,y\}}
+\langle K| g(ab,uv) |K  \rangle s(badc,wxyz)
+\end{equation*}
+\begin{equation*}
+= \sum_{M}  \sum_{wxyz}^{\in\{act\}} 
+\sum_{cd}^{\in\{act\}}  c^{\dagger}_{M,\pi^{K}_{dcwxyz}}A^{(g)}_{dcwxyz}
+\end{equation*}
+\noindent If $a,b,c,d \in \{active\}$, then
+\begin{equation*}
+ \sum_{M}  \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,J}  \langle J|\hat{a}_{a}\hat{a}^{\dagger}_{b}
+\hat{a}_{c}\hat{a}^{\dagger}_{d}\hat{a}^{\dagger}_{w}\hat{a}_{x}\hat{a}^{\dagger}_{y}\hat{a}_{z}g(ijkl) |K  \rangle
+\end{equation*}
+\begin{equation*}
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} 
+ \sum_{\{t,v\}}^{\subset\{b,d,x,z\}}\sum_{\{s,u\}}^{\subset\{a,c,w,y\}}
+ \langle K|g(st,uv) |K  \rangle  s(badc,wxyz)
+\end{equation*}
+\begin{equation*}
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} T^{*}_{LM,badc}
+ \sum_{\{t,v\}}^{\subset\{b,d,x,z\}}\sum_{\{s,u\}}^{\subset\{a,c,w,y\}}
+ \langle K|\hat{E}_{ba}g(st,uv) |K  \rangle  s(badc,wxyz)
+\end{equation*}
+\begin{equation*}
+= \sum_{M}   \sum_{abcdwxyz}^{\in\{act\}} 
+ c^{\dagger}_{M,\pi^{K}_{badcwxyz}} A_{badcwxyz}^{(g)}\end{equation*}
+\end{document}
