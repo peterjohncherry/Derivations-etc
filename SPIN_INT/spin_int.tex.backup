@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{subfigure}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{ifthen}
+\usepackage{lscape}
+\usepackage{relsize}
+\usepackage{bbold}
+\usepackage{mathtext}
+\usepackage{pdfpages}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=35mm,
+ top=25mm,
+ bottom=25mm,
+ right=20mm,
+ }
+\usepackage{cite}
+\linespread{1.3}
+
+\begin{document}
+Strong spin orbit coupling will result in a non-block-diagonal Hamiltonian
+and non-block diagonal time reversal operator:
+\begin{equation}
+[\hat{H}] =
+\begin{bmatrix}
+[\hat{H}]_{m_{1}m_{1}} & [\hat{H}]_{m_{1}m_{2}}       & [\hat{H}]_{m_{1}m_{3}}  & ... \\
+[\hat{H}]_{m_{2}m_{1}} & [\hat{H}]_{m_{2}m_{2}}       & [\hat{H}]_{m_{2}m_{3}}  & ... \\
+[\hat{H}]_{m_{3}m_{1}} & [\hat{H}]_{m_{3}m_{2}}       & [\hat{H}]_{m_{3}m_{3}}  & ... \\
+...      & ...     & ...     & ... \\
+\end{bmatrix}.
+\rightarrow
+[\hat{U}] =
+\begin{bmatrix}
+[\hat{U}]_{m_{1}m_{1}} & [\hat{U}]_{m_{1}m_{2}}       & [\hat{U}]_{m_{1}m_{3}}  & ... \\
+[\hat{U}]_{m_{2}m_{1}} & [\hat{U}]_{m_{2}m_{2}}       & [\hat{U}]_{m_{2}m_{3}}  & ... \\
+[\hat{U}]_{m_{3}m_{1}} & [\hat{U}]_{m_{3}m_{2}}       & [\hat{U}]_{m_{3}m_{3}}  & ... \\
+...      & ...     & ...     & ... \\
+\end{bmatrix}
+\end{equation}
+\noindent Where $[\hat{H}]_{m_{k}m_{k}}$ is the representation of the operator $\hat{H}$ in 
+the basis formed by the wavefunctions in the $k$th spin multiplet. The wavefunctions of this multiplet will be eigenfunctions 
+of some non-relativistic Hamiltonian (i.e. no spin-orbit)  which does not include a magnetic field. Here I'm assuming 
+$\hat{H}$ is a relativistic Hamiltonian which includes both spin-orbit coupling terms and a finite magnetic field.
+The off-diagonal blocks govern the interaction between the different spin multiplets. The density matrix at time 
+$t=0$, can be similarly written as
+\begin{equation}
+\begin{bmatrix}
+[\hat{\rho}(t=0)]_{11} &[\hat{\rho}(t=0)]_{12} & [\hat{\rho}(t=0)]_{13} & ...\\
+[\hat{\rho}(t=0)]_{21} &[\hat{\rho}(t=0)]_{22} & [\hat{\rho}(t=0)]_{23} & ...\\
+[\hat{\rho}(t=0)]_{31} &[\hat{\rho}(t=0)]_{32} & [\hat{\rho}(t=0)]_{33} &  ...\\
+... & ... & ... & ...
+\end{bmatrix}.
+\end{equation}
+\noindent If we are only interested in the expectation value, $\langle E_{1} \rangle$, associated with the ground state
+then we may write:
+\begin{equation}
+\langle E_{1}(t) \rangle =
+Tr [ [\hat{H}]_{11}[\rho]_{11}(t) ] = 
+Tr[ [\hat{H}]_{11}] \sum_{ij} [\hat{U}]_{1i}(t)][\hat{\rho}(0)]_{ij} [\hat{U}^{\dagger}_{j1}(t)].
+\end{equation}
+\noindent Which can be written as:
+\begin{equation}
+\langle E_{1}(t) \rangle =
+\sum_{k}Tr[ [\hat{H}_{m_{1}m_{1}}] [\hat{U}_{m_{1}m_{1}}(t)][\rho_{m_{1}m_{1}}(t=0)] [\hat{U}^{\dagger}_{m_{1}m_{1}}(t)]]+ 
+\sum_{m_{k>1}}Tr[ [\hat{H}_{m_{1}m_{1}}] [\hat{U}_{m_{1}m_{k}}(t)][\rho_{m_{k}m_{k}}(t=0)] [\hat{U}^{\dagger}_{m_{k}m_{1}}(t)]].
+\end{equation}
+\noindent I can see the appeal of this, as the first term is just the standard expression for magnetic resonance tensors,
+whilst the second term includes a series of corrections due to the excited multiplets being mixed into the ground states.\\ 
+
+\noindent What I've got above analysis relies on the block diagonality of the density operator $\hat{\rho}$ when represented
+in a basis of non-relativistic wavefunctions. Whilst this does not cause problems for the above interpretation
+when only have a single state is occupied, I
+am running into trouble where several different multiplets are occupied and I'm using ensemble density
+matrices to describe the system. 
+
+\noindent The eigenfunctions of the
+ Dirac-Breit-Gaunt Hamiltonian can be expressed as linear combinations
+of eigenfunctions of the non-relativistic Hartree-Fock Hamiltonian:
+\begin{equation}
+|\Psi_{i}\rangle=\sum_{\gamma}c^{i}_{\gamma}|\Phi_{\gamma}\rangle
+\end{equation}
+\noindent the corresponding density operator $ |\Psi_{i}\rangle\langle\Psi_{i}} $ for relativistic wavefunction, $|\Psi_{i}\rangle$,
+represented in the basis formed from the non-relativistic wavefunctions is then
+\begin{equation}
+[\rho^{i}] = 
+\begin{bmatrix}
+c_{i,1}c^{*}_{i,1}& c_{i,1}c^{*}_{i,2}0 & c_{i,1}c^{*}_{i,3}0 & ...\\
+c_{i,2}c^{*}_{i,1}& c_{i,2}c^{*}_{i,2}0 & c_{i,2}c^{*}_{i,3}0 & ...\\
+c_{i,3}c^{*}_{i,1}& c_{i,3}c^{*}_{i,2}0 & c_{i,3}c^{*}_{i,3}0 & ...\\
+... & ... & ... & ...
+\end{bmatrix}
+\end{equation}
+\noindent The indexes correspond to the indexes of the eigenfunctions in the non-relativistic
+Hamiltonian. The ensemble density matrix, is then
+\begin{equation}
+\sum_{i}exp[\frac{-\epsilon_{i}}{kT}][\rho^{i}] = 
+\end{equation}
+
+
+\end{document}
